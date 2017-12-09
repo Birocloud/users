@@ -14,7 +14,7 @@ cache:
   - $HOME/.m2
 
 env:
-  - DOCKER_IMAGE=birocloud/users
+  - DOCKER_IMAGE=kristijanmirceta/birocloud-users
 
 script:
   - mvn clean package -U
