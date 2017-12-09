@@ -55,7 +55,7 @@ public class UsersBean {
     private void init() {
         httpClient = HttpClientBuilder.create().build();
         objectMapper = new ObjectMapper();
-        basePath = "http://localhost:8080/v1/";
+        basePath = "http://docker.for.mac.localhost:8080/v1/";
     }
 
     @PersistenceContext(unitName = "users-jpa")
