@@ -1,3 +1,5 @@
+Now available on dockerhub!
+
 ## Simplest way of running
 
 #### Run the database in docker
@@ -34,5 +36,3 @@ docker build -t users-api .
 #### Run the container
 
 docker run -d --name usersapi -p 8081:8080 users-api
-
-enjoy using.
