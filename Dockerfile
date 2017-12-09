@@ -4,7 +4,7 @@ RUN mkdir /app
 
 WORKDIR /app
 
-ADD ./users-api-1.0-SNAPSHOT.jar /app
+ADD ./users-api/target/users-api-1.0-SNAPSHOT.jar /app
 
 EXPOSE 8080
 
