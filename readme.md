@@ -57,3 +57,9 @@ docker run -d -p 2379:2379 \
      --initial-cluster-state new \
      --auto-compaction-retention 1 \
      -cors="*"
+     
+- perform operations on this instance
+
+docker exec etcd etcdctl --endpoints //0.0.0.0:2379 set /environments/dev/services/users-service/1.0.0/config/rest-properties/external-dependencies/accountoptions-service/enabled true
+
+docker exec etcd etcdctl --endpoints //0.0.0.0:2379 get /environments/dev/services/users-service/1.0.0/config/rest-properties/external-dependencies/accountoptions-service/enabled

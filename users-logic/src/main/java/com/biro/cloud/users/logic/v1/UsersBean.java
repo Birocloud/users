@@ -73,7 +73,7 @@ public class UsersBean {
 
         List<Users> users = query.getResultList();
         if (restProperties.isAccountOptionsServiceEnabled()) {
-            users.get(0).setUsername("Fukach svoje matere!");
+            users.get(0).setUsername("ACCOUNT OPTIONS DISABLED");
         }
 
         return users;
