@@ -12,6 +12,7 @@ import java.util.List;
 // project
 import com.biro.cloud.users.persistence.v1.AccountOptions;
 import com.biro.cloud.users.persistence.v1.Users;
+import com.biro.cloud.users.logic.v1.configuration.RestProperties;
 
 // javax persistence
 import javax.annotation.PostConstruct;
@@ -48,6 +49,9 @@ public class UsersBean {
     private String basePath;
 
     @Inject
+    private RestProperties restProperties;
+
+    @Inject
     private UsersBean usersBean;
 
 
@@ -68,8 +72,13 @@ public class UsersBean {
         Query query = em.createNamedQuery("Users.getAll", Users.class);
 
         List<Users> users = query.getResultList();
+        if (restProperties.isAccountOptionsServiceEnabled()) {
+            users.get(0).setUsername("Fukach svoje matere!");
+        }
 
-        return addAccountOptionsToUsersList(users);
+        return users;
+
+        // return addAccountOptionsToUsersList(users);
     }
 
     public List<Users> getUsersFilter(UriInfo uriInfo) {

@@ -13,3 +13,7 @@ kumuluzee:
       username: postgres
       password: postgres
       max-pool-size: 20
+rest-properties:
+  external-dependencies:
+    accountoptions-service:
+      enabled: false
