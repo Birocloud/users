@@ -25,6 +25,7 @@
         <postgresql.version>42.1.4</postgresql.version>
         <kumuluzee-rest.version>1.1.0</kumuluzee-rest.version>
         <kumuluzee-config.version>1.0.0</kumuluzee-config.version>
+        <kumuluzee-discovery.version>1.1.0-SNAPSHOT</kumuluzee-discovery.version>
         <httpclient.version>4.5.3</httpclient.version>
         <jackson.version>2.9.2</jackson.version>
     </properties>
@@ -49,6 +50,11 @@
                 <groupId>com.kumuluz.ee.config</groupId>
                 <artifactId>kumuluzee-config-etcd</artifactId>
                 <version>${kumuluzee-config.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.kumuluz.ee.discovery</groupId>
+                <artifactId>kumuluzee-discovery-etcd</artifactId>
+                <version>${kumuluzee-discovery.version}</version>
             </dependency>
 
             <!-- other dependencies -->

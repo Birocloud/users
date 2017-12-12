@@ -2,8 +2,7 @@ package com.biro.cloud.users.logic.v1;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,6 +21,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 // kumuluzee
+import com.kumuluz.ee.discovery.annotations.DiscoverService;
 import com.kumuluz.ee.rest.beans.QueryParameters;
 import com.kumuluz.ee.rest.utils.JPAUtils;
 
@@ -46,10 +46,13 @@ public class UsersBean {
 
     private ObjectMapper objectMapper;
     private HttpClient httpClient;
-    private String basePath;
 
     @Inject
     private RestProperties restProperties;
+
+    @Inject
+    @DiscoverService(value = "accountoptions-service")
+    private Optional<String> basePath;
 
     @Inject
     private UsersBean usersBean;
@@ -59,7 +62,6 @@ public class UsersBean {
     private void init() {
         httpClient = HttpClientBuilder.create().build();
         objectMapper = new ObjectMapper();
-        basePath = "http://docker.for.mac.localhost:8080/v1/";
     }
 
     @PersistenceContext(unitName = "users-jpa")
@@ -72,13 +74,13 @@ public class UsersBean {
         Query query = em.createNamedQuery("Users.getAll", Users.class);
 
         List<Users> users = query.getResultList();
-        if (restProperties.isAccountOptionsServiceEnabled()) {
-            users.get(0).setUsername("ACCOUNT OPTIONS DISABLED");
+        if (!restProperties.isAccountOptionsServiceEnabled()) {
+            return users;
         }
-
-        return users;
-
-        // return addAccountOptionsToUsersList(users);
+        if (basePath.isPresent()) {
+            return addAccountOptionsToUsersList(users);
+        }
+        return null;
     }
 
     public List<Users> getUsersFilter(UriInfo uriInfo) {
@@ -120,7 +122,7 @@ public class UsersBean {
 
     public List<AccountOptions> getAccountOptions(String userId) {
         try {
-            HttpGet request = new HttpGet(basePath + "accountoptions/filtered?filter=userId:EQ:" + userId);
+            HttpGet request = new HttpGet(basePath.get() + "/v1/accountoptions/filtered?filter=userId:EQ:" + userId);
             HttpResponse response = httpClient.execute(request);
 
             int status = response.getStatusLine().getStatusCode();
