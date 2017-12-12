@@ -9,7 +9,7 @@ kumuluzee:
       port: 8080
   datasources:
     - jndi-name: jdbc/BusersDS
-      connection-url: jdbc:postgresql://localhost:5433/users
+      connection-url: jdbc:postgresql://postgres-users:5432/users
       username: postgres
       password: postgres
       max-pool-size: 20
@@ -17,10 +17,10 @@ kumuluzee:
     start-retry-delay-ms: 500
     max-retry-delay-ms: 900000
     etcd:
-      hosts: http://0.0.0.0:2379
+      hosts: http://etcd:2379
   discovery:
     etcd:
-      hosts: http://0.0.0.0:2379
+      hosts: http://etcd:2379
 rest-properties:
   external-dependencies:
     accountoptions-service:
