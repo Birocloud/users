@@ -27,8 +27,10 @@ public class InfoResource {
     public Response getInfo() {
 
         Info info = new Info();
-        info.mikrostoritve.set(0, infoProperties.getUsersMicroserviceAddress() + "/v1/users");
-        info.mikrostoritve.set(1, infoProperties.getAccountOptionsMicroserviceAddress() + "/v1/accountoptions");
+        try {
+            info.mikrostoritve.set(0, infoProperties.getUsersMicroserviceAddress() + "/v1/users");
+            info.mikrostoritve.set(1, infoProperties.getAccountOptionsMicroserviceAddress() + "/v1/accountoptions");
+        } catch (Exception e) {}
         return Response.status(Response.Status.OK).entity(info).build();
     }
 
