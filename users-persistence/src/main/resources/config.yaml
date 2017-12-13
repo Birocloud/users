@@ -25,3 +25,8 @@ rest-properties:
   external-dependencies:
     accountoptions-service:
       enabled: false
+kubernetes:
+  accountoptions-service:
+    address: http://169.51.26.156:30521
+  users-service:
+    address: http://169.51.26.156:30519
