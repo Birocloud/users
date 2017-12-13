@@ -9,7 +9,7 @@ import javax.enterprise.context.ApplicationScoped;
 @ConfigBundle("kubernetes")
 public class InfoProperties {
 
-    @ConfigValue(value = "accountoptions-service.address", watch = true)
+    @ConfigValue(value = "users-service.address", watch = true)
     private String usersMicroserviceAddress;
 
     @ConfigValue(value = "accountoptions-service.address", watch = true)
